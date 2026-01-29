@@ -1,9 +1,9 @@
-#include <iostream>
 #include <SFML/Graphics.hpp>
 
 
 
 int main(){
-  std::cout << "Hello world\n";
-  return 0;
+  sf::Window window(sf::VideoMode({800,800}) , "2d_dodge_player");
+
+  
 }
