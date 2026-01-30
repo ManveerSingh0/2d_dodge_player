@@ -1,24 +1,33 @@
+#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
 
 
-
-
 int main(){
-  sf::RenderWindow window( sf::VideoMode( { 200, 200 } ), "SFML works!" );
-  sf::CircleShape shape( 100.f );
-  shape.setFillColor( sf::Color::Green );
+  sf::RenderWindow window(sf::VideoMode({800,800}) , "2d_dodge_player", sf::Style::Default);
+  window.setPosition({0,0});
 
-  while ( window.isOpen() )
-    {
-      while ( const std::optional event = window.pollEvent() )
-	{
-	  if ( event->is<sf::Event::Closed>() )
-	    window.close();
-	}
 
-      window.clear();
-      window.draw( shape );
-      window.display();
+
+  auto on_close = [&window](sf::Event::Closed){
+    window.close();
+  };
+
+  auto close_on_escape = [&window](const sf::Event::KeyPressed& event){
+    if(event.scancode == sf::Keyboard::Scancode::Escape){
+      window.close();
     }
+  };
+
+  // Main loop 
+  while(window.isOpen()){
+    window.handleEvents(on_close, close_on_escape);
+
+
+    window.clear(sf::Color::Red);
+    window.display();
+  }
+
+
+  
 }
